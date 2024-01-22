@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct SummitsApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            SummitsListView()
         }
+        .modelContainer(for: Hike.self)
     }
 }
