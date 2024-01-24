@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import PhotosUI
 
 @Observable class HikeLogViewModel {
     var selectedDate = Date()
@@ -15,12 +16,13 @@ import SwiftData
     var companions: String = ""
     var details: String = ""
     
-    var alertError: AlertError? = nil
-    var alertShown: Binding<Bool> {
-        Binding {
-            self.alertError != nil
-        } set: { _ in
-            self.alertError = nil
-        }
+    var images: [Data] = []
+    
+    var deleteAlertVisible: Bool = false
+    
+    var dateRange: ClosedRange<Date> {
+        let today = Date()
+        let earliestDate = Date.distantPast
+        return earliestDate...today
     }
 }

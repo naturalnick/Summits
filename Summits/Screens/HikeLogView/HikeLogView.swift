@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import PhotosUI
 
 enum FormTextField {
     case weather, companions, details
@@ -19,22 +20,20 @@ struct HikeLogView: View {
     
     let summit: Summit
     var currentHike: Hike
-    
     @Binding var hikeLogVisible: Bool
+    
     @FocusState private var focusedField: FormTextField?
     
-    @State var deleteAlertVisible: Bool = false
-    
-    var dateRange: ClosedRange<Date> {
-        let today = Date()
-        let earliestDate = Date.distantPast
-        return earliestDate...today
+    func deleteHike() {
+        viewModel.deleteAlertVisible = false
+        hikeLogVisible = false
+        modelContext.delete(currentHike)
     }
     
     var body: some View {
         NavigationStack {
             Form {
-                DatePicker("Summit Date", selection: $viewModel.selectedDate, in: dateRange, displayedComponents: .date)
+                DatePicker("Summit Date", selection: $viewModel.selectedDate, in: viewModel.dateRange, displayedComponents: .date)
                     .onChange(of: viewModel.selectedDate) { oldDate, newDate in
                         currentHike.date = newDate
                     }
@@ -43,14 +42,18 @@ struct HikeLogView: View {
                     HStack {
                         Text("Rating")
                         Spacer()
-                        RatingView(rating: $viewModel.rating, disabled: false)
-                            .onChange(of: viewModel.rating) { oldRating, newRating in
-                                currentHike.rating = newRating
-                            }
+                        Rating(rating: $viewModel.rating, disabled: false)
                             .onChange(of: viewModel.rating) { oldRating, newRating in
                                 currentHike.rating = newRating
                             }
                     }
+                }
+                
+                Section {
+                    ImagePicker(images: $viewModel.images)
+                }
+                .onChange(of: viewModel.images) { oldImages, newImages in
+                    currentHike.images = newImages
                 }
                 
                 Section {
@@ -97,7 +100,7 @@ struct HikeLogView: View {
                 }
                 
                 Button {
-                    deleteAlertVisible = true
+                    viewModel.deleteAlertVisible = true
                 } label: {
                     Text("Delete Hike")
                         .foregroundStyle(.red)
@@ -137,13 +140,12 @@ struct HikeLogView: View {
             viewModel.weather = currentHike.weather
             viewModel.companions = currentHike.companions
             viewModel.details = currentHike.details
+            viewModel.images = currentHike.images ?? []
         })
         .interactiveDismissDisabled(!currentHike.saved)
-        .confirmationDialog("Confirm Delete Hike", isPresented: $deleteAlertVisible, titleVisibility: .visible) {
+        .confirmationDialog("Confirm Delete Hike", isPresented: $viewModel.deleteAlertVisible, titleVisibility: .visible) {
             Button(role: .destructive, action: {
-                deleteAlertVisible = false
-                hikeLogVisible = false
-                modelContext.delete(currentHike)
+                deleteHike()
             }, label: {
                 Text("Delete")
             })
@@ -153,12 +155,13 @@ struct HikeLogView: View {
     }
 }
 
-//#Preview {
-//    NavigationStack {
-//        Text("")
-//    }
-//    .sheet(isPresented: .constant(true), content: {
-//        HikeLogView(viewModel: HikeLogViewModel(), summit: MockData.sampleSummit, currentHike: Hike(summitID: "0", date: Date(), rating: 5, weather: "Sunny", companions: "", details: "Details"), completeViewVisible: .constant(false))
-//            .presentationDetents([.large])
-//    })
-//}
+#Preview {
+    NavigationStack {
+        Text("")
+            .sheet(isPresented: .constant(true), content: {
+                HikeLogView(viewModel: HikeLogViewModel(), summit: MockData.sampleSummit, currentHike: Hike(summitID: "0", date: Date(), rating: 5, weather: "Sunny", companions: "", details: "Details", images: []), hikeLogVisible: .constant(true))
+                    .presentationDetents([.large])
+            })
+    }
+    .modelContainer(for: Hike.self)
+}

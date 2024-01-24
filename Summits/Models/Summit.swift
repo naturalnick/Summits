@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 struct Summit: Decodable, Identifiable, Equatable {
     let id: String
     let name: String
@@ -31,7 +32,7 @@ struct SummitResponse: Decodable {
 }
 
 struct MockData {
-    static let sampleSummit = Summit(id: "0", name: "Mount Washington", elevationFt: 6288, range: "Presidential Range", prominenceFt: 6148, geolocation: Geolocation(latitude: 44.2704, longitude: -71.3033), state: "New Hampshire")
+    static let sampleSummit = Summit(id: "0", name: "Washington", elevationFt: 6288, range: "Presidential Range", prominenceFt: 6148, geolocation: Geolocation(latitude: 44.2704, longitude: -71.3033), state: "New Hampshire")
     
     static let summits = [sampleSummit, sampleSummit, sampleSummit, sampleSummit]
 }

@@ -9,8 +9,11 @@ import SwiftUI
 import MapKit
 
 struct ActiveSummitView: View {
+    @Environment(\.dismiss) var dismiss
+    
     @State private var isZoomed: Bool = false
     var selectedSummit: Summit
+    var currentSummit: Summit?
     var summits: [Summit]
     @Binding var cameraPosition: MapCameraPosition
     
@@ -31,26 +34,28 @@ struct ActiveSummitView: View {
                         cameraPosition = .camera(MapCamera(centerCoordinate: CLLocationCoordinate2D(latitude: selectedSummit.geolocation.latitude, longitude: selectedSummit.geolocation.longitude), distance: 40000))
                     }
                 } label: {
-                    Text("Zoom")
-                        .padding(.horizontal)
-                        .padding(.vertical, 10)
-                        .foregroundStyle(.blue)
-                        .background(RoundedRectangle(cornerRadius: 10)
-                            .fill(.ultraThinMaterial)
+                    Image(systemName: "scope")
+                        .font(.system(size: 20))
+                        .frame(width: 50, height: 50)
+                        .background(
+                            Circle()
+                                .fill(.ultraThinMaterial)
                         )
                 }
             }
             
-            NavigationLink {
-                SummitDetailView(summits: summits, summit: selectedSummit)
-            } label: {
-                Text("Open")
-                    .padding(.horizontal)
-                    .padding(.vertical, 10)
-                    .foregroundStyle(.white)
-                    .background(RoundedRectangle(cornerRadius: 10)
-                        .fill(.blue)
-                    )
+            if let currentSummit, selectedSummit.id == currentSummit.id {
+                Button(action: {
+                    dismiss()
+                }, label: {
+                    SummitButton()
+                })
+            } else {
+                NavigationLink {
+                    SummitDetailView(summit: selectedSummit)
+                } label: {
+                    SummitButton()
+                }
             }
         }
         .padding()
@@ -62,5 +67,17 @@ struct ActiveSummitView: View {
                 isZoomed = false
             }
         }
+    }
+}
+
+struct SummitButton: View {
+    var body: some View {
+        Image(systemName: "arrowshape.turn.up.right.fill")
+            .font(.system(size: 20))
+            .frame(width: 50, height: 50)
+            .background(
+                Circle()
+                    .fill(.ultraThinMaterial)
+            )
     }
 }

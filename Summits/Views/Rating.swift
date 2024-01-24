@@ -1,13 +1,13 @@
 //
-//  RatingView.swift
+//  Rating.swift
 //  Summits
 //
-//  Created by Nick Schaefer on 1/21/24.
+//  Created by Nick Schaefer on 1/22/24.
 //
 
 import SwiftUI
 
-struct RatingView: View {
+struct Rating: View {
     @Binding var rating: Int
     var disabled: Bool
     
@@ -24,4 +24,8 @@ struct RatingView: View {
             }
         }
     }
+}
+
+#Preview {
+    Rating(rating: .constant(4), disabled: true)
 }

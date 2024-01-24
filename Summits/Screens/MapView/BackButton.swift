@@ -19,9 +19,10 @@ struct BackButton: View {
             navigateBack()
         }, label: {
             Image(systemName: "arrow.left")
-                .padding()
+                .font(.system(size: 20))
+                .frame(width: 50, height: 50)
                 .foregroundStyle(.black)
-                .background(Circle().fill(.white).shadow(radius: 10))
+                .background(Circle().fill(.thickMaterial).shadow(radius: 10))
         })
         .offset(y: 30)
     }

@@ -12,37 +12,61 @@ struct HikeDetailView: View {
     
     var body: some View {
         VStack {
-            HStack {
-                Text("Hiked \(formatDate(date: hike.date))")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .font(.headline)
-                RatingView(rating: .constant(hike.rating), disabled: true)
+            if let images = hike.images, !images.isEmpty, let uiImage = UIImage(data: images[0]) {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(maxWidth: .infinity, maxHeight: 300)
+                    .clipShape(UnevenRoundedRectangle(cornerRadii: RectangleCornerRadii(topLeading: 10, topTrailing: 10)))
             }
             
-            if !hike.weather.isEmpty {
-                Text("Weather: \(hike.weather)")
-                    .underline()
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.leading)
+            VStack (alignment: .leading) {
+                HStack {
+                    Text("Hiked \(formatDate(date: hike.date))")
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .font(.headline)
+                    Rating(rating: .constant(hike.rating), disabled: true)
+                }
+                .padding(.bottom, 5)
+                
+                if !hike.weather.isEmpty {
+                    HStack (alignment: .top) {
+                        Text("Weather: ")
+                            .underline()
+                        Text(hike.weather)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                }
+                
+                if !hike.companions.isEmpty {
+                    HStack (alignment: .top) {
+                        Text("Companions: ")
+                            .underline()
+                        Text(hike.companions)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                }
+                
+                if !hike.details.isEmpty {
+                    HStack (alignment: .top) {
+                        Text("Details: ")
+                            .underline()
+                        Text(hike.details)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                }
             }
-            
-            if !hike.companions.isEmpty {
-                Text("Companions: \(hike.companions)")
-                    .underline()
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.leading)
-            }
-            
-            if !hike.details.isEmpty {
-                Text("Details: \(hike.details)")
-                    .underline()
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.leading)
-            }
+            .multilineTextAlignment(.leading)
+            .padding()
         }
-        .padding()
         .frame(maxWidth: .infinity)
         .background(RoundedRectangle(cornerRadius: 12).foregroundStyle( Color(#colorLiteral(red: 0.9137254902, green: 0.9137254902, blue: 0.9215686275, alpha: 1))))
         .foregroundStyle(.black)
     }
 }
+
+//#Preview {
+//    List {
+//        HikeDetailView(hike: Hike(summitID: "0", date: Date(), rating: 4, weather: "Sunny", companions: "None", details: "Details", images: []))
+//    }
+//}
