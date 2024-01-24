@@ -13,7 +13,7 @@ struct SummitMarker: View {
     var hikes: [Hike]
     
     func getPinColor(summitID: String) -> Color {
-        return hikes.contains(where: { $0.summitID == summitID }) ? .green : .red
+        return hikes.contains(where: { $0.summitID == summitID }) ? Color("Emerald") : Color("AmcRed")
     }
     
     func getPinBorderColor(summitID: String) -> Color {

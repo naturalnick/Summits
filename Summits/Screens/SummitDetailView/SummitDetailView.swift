@@ -11,7 +11,6 @@ import SwiftData
 struct SummitDetailView: View {
     @Environment(\.modelContext) private var modelContext
     
-    let summits: [Summit]
     let summit: Summit
     
     @State var hikes: [Hike]?
@@ -30,45 +29,82 @@ struct SummitDetailView: View {
         }
     }
     
+    func addHike() {
+        let newHike = Hike(summitID: summit.id, date: Date(), rating: 5, weather: "", companions: "", details: "")
+        modelContext.insert(newHike)
+        currentHike = newHike
+        hikeLogVisible = true
+    }
+    
     var body: some View {
-        ScrollView {
-            Details(summit: summit)
-            
-            NavigationLink {
-                MapView(summits: summits, currentSummit: summit)
-            } label: {
-                Label("View on Map", systemImage: "location.fill")
-                    .frame(maxWidth: .infinity)
-            }
-            .buttonStyle(.bordered)
-            .controlSize(.large)
-            
-            if let hikes {
-                Button(action: {
-                    let newHike = Hike(summitID: summit.id, date: Date(), rating: 5, weather: "", companions: "", details: "")
-                    modelContext.insert(newHike)
-                    currentHike = newHike
-                    hikeLogVisible = true
-                }, label: {
-                    Label(hikes.isEmpty ? "Mark as Complete" : "Add Another Hike", systemImage: "checkmark")
-                        .frame(maxWidth: .infinity)
-                })
-                .buttonStyle(.borderedProminent)
-                .controlSize(.large)
-                
-                ForEach(hikes) { hike in
+        GeometryReader { geometry in
+            ZStack {
+                if let hikes, !hikes.isEmpty {
+                    VStack {
+                        Image(systemName: "checkmark.seal")
+                            .font(.system(size: 100))
+                            .position(x: geometry.size.width - 160, y: -80)
+                            .rotationEffect(Angle(degrees: 15))
+                            .foregroundStyle(Color("Emerald"))
+                            .opacity(0.5)
+                    }
+                }
+                VStack {
+                    HStack {
+                        VStack {
+                            Text(summit.range)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            Text(summit.state)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                        Spacer()
+                        
+                        NavigationLink {
+                            MapView(currentSummit: summit)
+                        } label: {
+                            Image(systemName: "location.fill")
+                                .font(.system(size: 20))
+                                .frame(width: 50, height: 50)
+                                .foregroundStyle(Color("AmcRed"))
+                                .background(
+                                    Circle()
+                                        .fill(.white)
+                                        .shadow(color: Color("LightestGray"), radius: 6)
+                                )
+                        }
+                    }
+                    
+                    DetailView(summit: summit)
+                    
                     Button(action: {
-                        currentHike = hike
-                        hikeLogVisible = true
+                        addHike()
                     }, label: {
-                        HikeDetailView(hike: hike)
-                            .allowsHitTesting(false)
+                        Label(hikes != nil && hikes!.isEmpty ? "Mark as Complete" : "Add Another Hike", systemImage: "checkmark")
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .foregroundStyle(.white)
+                            .background(RoundedRectangle(cornerRadius: 10).fill(Color("Emerald")))
                     })
+                    
+                    ScrollView {
+                        if let hikes {
+                            ForEach(hikes) { hike in
+                                Button(action: {
+                                    currentHike = hike
+                                    hikeLogVisible = true
+                                }, label: {
+                                    HikeDetailView(hike: hike)
+                                        .allowsHitTesting(false)
+                                })
+                            }
+                        }
+                    }
                 }
             }
         }
         .padding()
         .navigationTitle(summit.name)
+        .navigationBarTitleDisplayMode(.large)
         .sheet(isPresented: $hikeLogVisible) { [currentHike] in
             if currentHike != nil {
                 HikeLogView(summit: summit, currentHike: currentHike!, hikeLogVisible: $hikeLogVisible)
@@ -85,18 +121,11 @@ struct SummitDetailView: View {
     }
 }
 
-struct Details: View {
+struct DetailView: View {
     let summit: Summit
     
     var body: some View {
         VStack {
-            Text(summit.range)
-                .frame(maxWidth: .infinity, alignment: .leading)
-            
-            Text(summit.state)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.bottom)
-            
             HStack {
                 VStack {
                     Text("Elevation:")
@@ -118,6 +147,9 @@ struct Details: View {
     }
 }
 
-//#Preview {
-//    SummitDetailView(summit: MockData.sampleSummit, hikes: [Hike(summitID: "0", date: Date(), rating: 5, weather: "Sunny", companions: "", details: "Fun times")])
-//}
+#Preview {
+    NavigationStack {
+        SummitDetailView(summit: MockData.sampleSummit, hikes: [])
+    }
+    .modelContainer(for: Hike.self)
+}

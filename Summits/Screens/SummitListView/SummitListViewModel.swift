@@ -10,8 +10,7 @@ import SwiftUI
 final class SummitListViewModel: ObservableObject {
     @Published var summits: [Summit] = []
     @Published var filteredSummits: [Summit] = []
-    @Published var filter = "all"
-    @Published var sortBy = "elevation"
+    @Published var filterShown = false
     @Published var alertError: AlertError?
     
     var alertShown: Binding<Bool> {
@@ -23,20 +22,14 @@ final class SummitListViewModel: ObservableObject {
     }
     
     func loadSummits() {
-        if let file = Bundle.main.url(forResource: "data", withExtension: "json") {
-            do {
-                let data = try Data(contentsOf: file)
-                let decoder = JSONDecoder()
-                let result = try decoder.decode(SummitResponse.self, from: data)
-                summits = result.response
-                filteredSummits = summits
-            } catch {
-                print("Error decoding JSON: \(error)")
-                alertError = AlertError.invalidJSON
-            }
-        } else {
-            print("Summits file not found.")
-            alertError = AlertError.fileNotFound
+        do {
+            let summits = try getSummits()
+            self.summits = summits
+            filteredSummits = summits
+        } catch let error as AlertError {
+            alertError = error
+        } catch {
+            print(error)
         }
     }
     

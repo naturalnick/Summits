@@ -35,7 +35,7 @@ struct SummitListCell: View {
             
             if hiked {
                 Image(systemName: "checkmark.seal.fill")
-                    .foregroundStyle(.green)
+                    .foregroundStyle(Color("Emerald"))
                     .font(.title3)
             }
         }

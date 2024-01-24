@@ -18,9 +18,11 @@ class Hike: Identifiable {
     var companions: String
     var details: String
     
+    @Attribute(.externalStorage) var images: [Data]? = []
+    
     var saved: Bool = false
     
-    init(summitID: String, date: Date, rating: Int, weather: String, companions: String, details: String) {
+    init(summitID: String, date: Date, rating: Int, weather: String, companions: String, details: String, images: [Data] = []) {
         self.id = UUID().uuidString
         self.summitID = summitID
         self.date = date
@@ -28,6 +30,7 @@ class Hike: Identifiable {
         self.weather = weather
         self.companions = companions
         self.details = details
+        self.images = images
     }
     
 }
