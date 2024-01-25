@@ -140,7 +140,7 @@ struct HikeLogView: View {
             viewModel.weather = currentHike.weather
             viewModel.companions = currentHike.companions
             viewModel.details = currentHike.details
-            viewModel.images = currentHike.images ?? []
+            viewModel.images = currentHike.images
         })
         .interactiveDismissDisabled(!currentHike.saved)
         .confirmationDialog("Confirm Delete Hike", isPresented: $viewModel.deleteAlertVisible, titleVisibility: .visible) {
