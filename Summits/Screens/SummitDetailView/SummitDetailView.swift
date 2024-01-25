@@ -74,7 +74,7 @@ struct SummitDetailView: View {
                         }
                     }
                     
-                    DetailView(summit: summit)
+                    ElevationView(summit: summit)
                     
                     Button(action: {
                         addHike()
@@ -116,32 +116,6 @@ struct SummitDetailView: View {
         .onChange(of: hikeLogVisible) { oldValue, newValue in
             if newValue == false {
                 getHikes(summitID: summit.id)
-            }
-        }
-    }
-}
-
-struct DetailView: View {
-    let summit: Summit
-    
-    var body: some View {
-        VStack {
-            HStack {
-                VStack {
-                    Text("Elevation:")
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    Text("\(summit.elevationFt) ft")
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .font(.title)
-                }
-                
-                VStack {
-                    Text("Prominence:")
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    Text("\(summit.prominenceFt) ft")
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .font(.title)
-                }
             }
         }
     }
