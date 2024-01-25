@@ -16,6 +16,7 @@
 		01424CA62B5D544000698D3A /* Hike.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01424CA52B5D544000698D3A /* Hike.swift */; };
 		01424CA82B5D6E0600698D3A /* HikeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01424CA72B5D6E0600698D3A /* HikeDetailView.swift */; };
 		01424CAA2B5D6F3900698D3A /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01424CA92B5D6F3900698D3A /* Utils.swift */; };
+		017D830B2B62084300DAB12D /* ElevationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017D830A2B62084300DAB12D /* ElevationView.swift */; };
 		01828EA92B5EE926009D6D2E /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01828EA82B5EE926009D6D2E /* MapView.swift */; };
 		01828EAD2B5F198D009D6D2E /* SummitMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01828EAC2B5F198D009D6D2E /* SummitMarker.swift */; };
 		01828EAF2B5F1A46009D6D2E /* ActiveSummitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01828EAE2B5F1A46009D6D2E /* ActiveSummitView.swift */; };
@@ -44,6 +45,7 @@
 		01424CA52B5D544000698D3A /* Hike.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hike.swift; sourceTree = "<group>"; };
 		01424CA72B5D6E0600698D3A /* HikeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HikeDetailView.swift; sourceTree = "<group>"; };
 		01424CA92B5D6F3900698D3A /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		017D830A2B62084300DAB12D /* ElevationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElevationView.swift; sourceTree = "<group>"; };
 		01828EA82B5EE926009D6D2E /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		01828EAC2B5F198D009D6D2E /* SummitMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummitMarker.swift; sourceTree = "<group>"; };
 		01828EAE2B5F1A46009D6D2E /* ActiveSummitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveSummitView.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 			children = (
 				01B4CEB22AD23EDF00B551A5 /* SummitDetailView.swift */,
 				01424CA72B5D6E0600698D3A /* HikeDetailView.swift */,
+				017D830A2B62084300DAB12D /* ElevationView.swift */,
 			);
 			path = SummitDetailView;
 			sourceTree = "<group>";
@@ -280,6 +283,7 @@
 				01DF09A92ACB010B00692354 /* Summit.swift in Sources */,
 				01DF09B92ACBA28700692354 /* SummitListViewModel.swift in Sources */,
 				01CC32D72AD2EA0200901008 /* HikeLogView.swift in Sources */,
+				017D830B2B62084300DAB12D /* ElevationView.swift in Sources */,
 				01E5287E2AD42A8A00AF60FB /* HikeLogViewModel.swift in Sources */,
 				01424CAA2B5D6F3900698D3A /* Utils.swift in Sources */,
 				01DF09AB2ACB2D0100692354 /* SummitListCell.swift in Sources */,
