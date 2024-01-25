@@ -12,10 +12,32 @@ struct ActiveSummitView: View {
     @Environment(\.dismiss) var dismiss
     
     @State private var isZoomed: Bool = false
+    @State private var mapDialogVisible = false
+    
     var selectedSummit: Summit
     var currentSummit: Summit?
     var summits: [Summit]
     @Binding var cameraPosition: MapCameraPosition
+    
+    func exportLocation(toApp appName: String) {
+        let latitude = selectedSummit.geolocation.latitude
+        let longitude = selectedSummit.geolocation.longitude
+        if appName == "Apple" {
+            let item = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude)))
+            item.openInMaps()
+        }
+        
+        if appName == "Google" {
+            let url = URL(string: "comgooglemaps://?q=\(latitude),\(longitude)")
+            if !UIApplication.shared.canOpenURL(url!) {
+                UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+            } else {
+                let urlBrowser = URL(string: "https://www.google.com/maps/search/?api=1&query=\(latitude),\(longitude)")
+                          
+                 UIApplication.shared.open(urlBrowser!, options: [:], completionHandler: nil)
+          }
+        }
+    }
     
     var body: some View {
         HStack {
@@ -44,6 +66,18 @@ struct ActiveSummitView: View {
                 }
             }
             
+            Button {
+                mapDialogVisible = true
+            } label: {
+                Image(systemName: "square.and.arrow.up")
+                    .font(.system(size: 20))
+                    .frame(width: 50, height: 50)
+                    .background(
+                        Circle()
+                            .fill(.ultraThinMaterial)
+                    )
+            }
+            
             if let currentSummit, selectedSummit.id == currentSummit.id {
                 Button(action: {
                     dismiss()
@@ -66,6 +100,19 @@ struct ActiveSummitView: View {
             if newValue.positionedByUser {
                 isZoomed = false
             }
+        }
+        .confirmationDialog("Options", isPresented: $mapDialogVisible, titleVisibility: .hidden) {
+            Button(action: {
+                exportLocation(toApp: "Apple")
+            }, label: {
+                Text("Open in Maps")
+            })
+            
+            Button(action: {
+                exportLocation(toApp: "Google")
+            }, label: {
+                Text("Open in Google Maps")
+            })
         }
     }
 }

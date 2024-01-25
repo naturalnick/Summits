@@ -194,8 +194,8 @@
 		01E5287C2AD4295E00AF60FB /* HikeLogView */ = {
 			isa = PBXGroup;
 			children = (
-				01CC32D62AD2EA0200901008 /* HikeLogView.swift */,
 				01E5287D2AD42A8A00AF60FB /* HikeLogViewModel.swift */,
+				01CC32D62AD2EA0200901008 /* HikeLogView.swift */,
 				01D8B8B52B6012D800739761 /* ImagePicker.swift */,
 			);
 			path = HikeLogView;

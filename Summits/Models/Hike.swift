@@ -18,7 +18,7 @@ class Hike: Identifiable {
     var companions: String
     var details: String
     
-    @Attribute(.externalStorage) var images: [Data]? = []
+    @Attribute(.externalStorage) var images: [Data] = []
     
     var saved: Bool = false
     

@@ -12,7 +12,7 @@ struct HikeDetailView: View {
     
     var body: some View {
         VStack {
-            if let images = hike.images, !images.isEmpty, let uiImage = UIImage(data: images[0]) {
+            if !hike.images.isEmpty, let uiImage = UIImage(data: hike.images[0]) {
                 Image(uiImage: uiImage)
                     .resizable()
                     .scaledToFill()
@@ -29,6 +29,15 @@ struct HikeDetailView: View {
                 }
                 .padding(.bottom, 5)
                 
+                if !hike.companions.isEmpty {
+                    HStack (alignment: .top) {
+                        Text("With: ")
+                            .underline()
+                        Text(hike.companions)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                }
+                
                 if !hike.weather.isEmpty {
                     HStack (alignment: .top) {
                         Text("Weather: ")
@@ -38,14 +47,6 @@ struct HikeDetailView: View {
                     }
                 }
                 
-                if !hike.companions.isEmpty {
-                    HStack (alignment: .top) {
-                        Text("Companions: ")
-                            .underline()
-                        Text(hike.companions)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                    }
-                }
                 
                 if !hike.details.isEmpty {
                     HStack (alignment: .top) {
@@ -57,7 +58,8 @@ struct HikeDetailView: View {
                 }
             }
             .multilineTextAlignment(.leading)
-            .padding()
+            .padding(.top, hike.images.isEmpty ? 12 : 5)
+            .padding([.horizontal, .bottom])
         }
         .frame(maxWidth: .infinity)
         .background(RoundedRectangle(cornerRadius: 12).foregroundStyle( Color(#colorLiteral(red: 0.9137254902, green: 0.9137254902, blue: 0.9215686275, alpha: 1))))

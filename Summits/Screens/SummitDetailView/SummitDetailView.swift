@@ -65,7 +65,7 @@ struct SummitDetailView: View {
                             Image(systemName: "location.fill")
                                 .font(.system(size: 20))
                                 .frame(width: 50, height: 50)
-                                .foregroundStyle(Color("AmcRed"))
+                                .foregroundStyle(.blue)
                                 .background(
                                     Circle()
                                         .fill(.white)
