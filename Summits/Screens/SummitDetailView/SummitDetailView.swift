@@ -15,7 +15,7 @@ struct SummitDetailView: View {
     
     @State var hikes: [Hike]?
     @State var currentHike: Hike? = nil
-    @State private var hikeLogVisible: Bool = false
+    @State private var hikeLogVisible = false
     
     func getHikes(summitID: String) {
         do {
