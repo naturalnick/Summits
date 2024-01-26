@@ -26,21 +26,24 @@ struct AccountView: View {
             Section {
                 Text("Developed by Nick Schaefer")
                 Link(destination: URL(string: "https://www.nschaefer.com/")!, label: {
-                    Text("www.nschaefer.com")
+                    Text("nschaefer.com")
                 })
-//                Button(action: {}, label: {
-//                    Label("Share App", systemImage: "square.and.arrow.up")
-//                })
+                Link(destination: URL(string: "https://github.com/naturalnick/Summits/blob/main/Privacy%20Policy")!, label: {
+                    Text("Privacy Policy")
+                })
+                ShareLink("Share App", item: URL(string: "https://apps.apple.com/us/app/white-mountain-4000ft-tracker/id6476589208")!)
             } header: {
                 Text("About")
             }
-            
+
             Section {
                 Button(role: .destructive, action: {
                     confirmResetVisible = true
                 }, label: {
                     Text("Clear Hike Data")
                 })
+            } header: {
+                Text("Actions")
             }
         }
         .navigationTitle("Settings")

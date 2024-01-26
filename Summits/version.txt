@@ -1,0 +1,2 @@
+Version 1.1 Changes
+Added privacy policy app share link to settings

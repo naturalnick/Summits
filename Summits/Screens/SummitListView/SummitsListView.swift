@@ -13,6 +13,7 @@ struct SummitsListView: View {
     var appearance = UIToolbarAppearance()
     
     @Query private var hikes: [Hike]
+    @State var isMapViewLoading = false
     
     var body: some View {
         NavigationStack {
@@ -65,8 +66,8 @@ struct SummitsListView: View {
                         NavigationLink {
                             MapView()
                         } label: {
-                            Image(systemName: "map.fill")
-                                .foregroundStyle(.gray)
+                                Image(systemName: "map.fill")
+                                    .foregroundStyle(.gray)
                         }
                     }
                 }
