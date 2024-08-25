@@ -22,10 +22,13 @@ struct HikeDetailView: View {
             
             VStack (alignment: .leading) {
                 HStack {
-                    Text("Hiked \(formatDate(date: hike.date))")
+                    Text("Hiked \(hike.date.formatted(date: .abbreviated, time: .omitted))")
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .font(.headline)
-                    Rating(rating: .constant(hike.rating), disabled: true)
+                    Rating(
+                        rating: .constant(hike.rating),
+                        disabled: true
+                    )
                 }
                 .padding(.bottom, 5)
                 
