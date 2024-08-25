@@ -33,6 +33,8 @@
 		01E5287E2AD42A8A00AF60FB /* HikeLogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E5287D2AD42A8A00AF60FB /* HikeLogViewModel.swift */; };
 		01E955BA2B5F3DF500CCDB67 /* SummitListFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E955B92B5F3DF500CCDB67 /* SummitListFilter.swift */; };
 		01E955BE2B5F4F2D00CCDB67 /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E955BD2B5F4F2D00CCDB67 /* Rating.swift */; };
+		9489DFB02C7B744000E70403 /* Sort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9489DFAF2C7B744000E70403 /* Sort.swift */; };
+		9489DFB22C7B744800E70403 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9489DFB12C7B744800E70403 /* Filter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +66,8 @@
 		01E5287D2AD42A8A00AF60FB /* HikeLogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HikeLogViewModel.swift; sourceTree = "<group>"; };
 		01E955B92B5F3DF500CCDB67 /* SummitListFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummitListFilter.swift; sourceTree = "<group>"; };
 		01E955BD2B5F4F2D00CCDB67 /* Rating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rating.swift; sourceTree = "<group>"; };
+		9489DFAF2C7B744000E70403 /* Sort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sort.swift; sourceTree = "<group>"; };
+		9489DFB12C7B744800E70403 /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +152,8 @@
 			children = (
 				01424CA52B5D544000698D3A /* Hike.swift */,
 				01DF09A82ACB010B00692354 /* Summit.swift */,
+				9489DFAF2C7B744000E70403 /* Sort.swift */,
+				9489DFB12C7B744800E70403 /* Filter.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -292,12 +298,14 @@
 				01424CAA2B5D6F3900698D3A /* Utils.swift in Sources */,
 				01DF09AB2ACB2D0100692354 /* SummitListCell.swift in Sources */,
 				01DF09BB2ACBA4D000692354 /* Alert.swift in Sources */,
+				9489DFB22C7B744800E70403 /* Filter.swift in Sources */,
 				01828EAD2B5F198D009D6D2E /* SummitMarker.swift in Sources */,
 				01B4CEB32AD23EDF00B551A5 /* SummitDetailView.swift in Sources */,
 				01E955BA2B5F3DF500CCDB67 /* SummitListFilter.swift in Sources */,
 				01E955BE2B5F4F2D00CCDB67 /* Rating.swift in Sources */,
 				01424CA62B5D544000698D3A /* Hike.swift in Sources */,
 				0104446E2ACAECB1004621C6 /* SummitsListView.swift in Sources */,
+				9489DFB02C7B744000E70403 /* Sort.swift in Sources */,
 				010ECBAF2AD9827100525BC8 /* AccountView.swift in Sources */,
 				010444602ACAEC4C004621C6 /* SummitsApp.swift in Sources */,
 				01828EAF2B5F1A46009D6D2E /* ActiveSummitView.swift in Sources */,
