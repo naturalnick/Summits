@@ -7,13 +7,6 @@
 
 import SwiftUI
 
-func formatDate(date: Date) -> String {
-    let formatter = DateFormatter()
-    formatter.dateFormat = "MMM dd, yyyy"
-    
-    return formatter.string(from: date)
-}
-
 func getSummits() throws -> [Summit] {
     if let file = Bundle.main.url(forResource: "data", withExtension: "json") {
         do {
