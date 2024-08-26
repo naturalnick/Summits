@@ -9,8 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct SummitsListView: View {
-    @StateObject var viewModel = SummitListViewModel()
-    var appearance = UIToolbarAppearance()
+    var viewModel = SummitListViewModel()
     
     @Query private var hikes: [Hike]
     @State var isMapViewLoading = false
@@ -18,14 +17,11 @@ struct SummitsListView: View {
     var body: some View {
         NavigationStack {
             GeometryReader { geometry in
-                ScrollViewReader { scrollProxy in
-                    VStack {
+                VStack {
+                    List {
                         if viewModel.filterShown {
                             SummitListFilter(hikes: hikes, filteredSummits: viewModel.filteredSummits, filterSummits: viewModel.filterSummits, sortSummits: viewModel.sortSummits)
                         }
-                        
-                    }
-                    List {
                         ForEach(Array(viewModel.filteredSummits.enumerated()), id: \.element.id) { index, summit in
                             NavigationLink {
                                 SummitDetailView(summit: summit)
@@ -42,42 +38,21 @@ struct SummitsListView: View {
                 }
                 .listStyle(.plain)
                 .navigationBarTitleDisplayMode(.large)
-                .navigationTitle("White Mountain 48")
+                .navigationTitle("New Hampshire 48")
                 .toolbar {
-                    ToolbarItem(placement: .topBarLeading) {
-                        NavigationLink {
-                            AccountView()
-                        } label: {
-                            Image(systemName: "gearshape.fill")
-                                .foregroundStyle(.gray)
-                        }
-                    }
-                    ToolbarItem(placement: .topBarTrailing) {
-                        Button {
-                            withAnimation {
-                                viewModel.filterShown.toggle()
-                            }
-                        } label: {
-                            Image(systemName: viewModel.filterShown ? "line.3.horizontal.decrease.circle" : "line.3.horizontal.decrease.circle.fill")
-                                .foregroundStyle(.gray)
-                        }
-                    }
-                    ToolbarItem(placement: .topBarTrailing) {
-                        NavigationLink {
-                            MapView()
-                        } label: {
-                                Image(systemName: "map.fill")
-                                    .foregroundStyle(.gray)
-                        }
-                    }
+                    SummitListToolbar(viewModel: viewModel)
                 }
             }
             
         }
         .onAppear {
             viewModel.loadSummits()
-            appearance.backgroundColor = UIColor(Color("AmcRed"))
+            viewModel.updateProgress(hikes: hikes)
         }
+        .onChange(of: hikes, { _, _ in
+            print("changed")
+            viewModel.updateProgress(hikes: hikes)
+        })
         .alert(isPresented: viewModel.alertShown, error: viewModel.alertError, actions: { error in
             // buttons
         }, message: { error in
@@ -90,4 +65,5 @@ struct SummitsListView: View {
 
 #Preview {
     SummitsListView()
+        .modelContainer(for: Hike.self)
 }

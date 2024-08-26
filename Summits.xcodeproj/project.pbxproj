@@ -13,6 +13,7 @@
 		0104446E2ACAECB1004621C6 /* SummitsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0104446D2ACAECB1004621C6 /* SummitsListView.swift */; };
 		010ECBAF2AD9827100525BC8 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010ECBAE2AD9827100525BC8 /* AccountView.swift */; };
 		010ECBB12AD9AE3400525BC8 /* EmptyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010ECBB02AD9AE3400525BC8 /* EmptyState.swift */; };
+		012F5EAF2B6F2FAE004A5291 /* SummitListToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012F5EAE2B6F2FAE004A5291 /* SummitListToolbar.swift */; };
 		01424CA62B5D544000698D3A /* Hike.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01424CA52B5D544000698D3A /* Hike.swift */; };
 		01424CA82B5D6E0600698D3A /* HikeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01424CA72B5D6E0600698D3A /* HikeDetailView.swift */; };
 		01424CAA2B5D6F3900698D3A /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01424CA92B5D6F3900698D3A /* Utils.swift */; };
@@ -43,6 +44,7 @@
 		0104446D2ACAECB1004621C6 /* SummitsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummitsListView.swift; sourceTree = "<group>"; };
 		010ECBAE2AD9827100525BC8 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		010ECBB02AD9AE3400525BC8 /* EmptyState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyState.swift; sourceTree = "<group>"; };
+		012F5EAE2B6F2FAE004A5291 /* SummitListToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummitListToolbar.swift; sourceTree = "<group>"; };
 		01424CA52B5D544000698D3A /* Hike.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hike.swift; sourceTree = "<group>"; };
 		01424CA72B5D6E0600698D3A /* HikeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HikeDetailView.swift; sourceTree = "<group>"; };
 		01424CA92B5D6F3900698D3A /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 				01DF09AA2ACB2D0000692354 /* SummitListCell.swift */,
 				010ECBB02AD9AE3400525BC8 /* EmptyState.swift */,
 				01E955B92B5F3DF500CCDB67 /* SummitListFilter.swift */,
+				012F5EAE2B6F2FAE004A5291 /* SummitListToolbar.swift */,
 			);
 			path = SummitListView;
 			sourceTree = "<group>";
@@ -283,6 +286,7 @@
 				010ECBB12AD9AE3400525BC8 /* EmptyState.swift in Sources */,
 				01828EA92B5EE926009D6D2E /* MapView.swift in Sources */,
 				01D8B8B62B6012D800739761 /* ImagePicker.swift in Sources */,
+				012F5EAF2B6F2FAE004A5291 /* SummitListToolbar.swift in Sources */,
 				01424CA82B5D6E0600698D3A /* HikeDetailView.swift in Sources */,
 				01DF09A92ACB010B00692354 /* Summit.swift in Sources */,
 				01DF09B92ACBA28700692354 /* SummitListViewModel.swift in Sources */,
@@ -449,7 +453,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nickschaefer.Summits;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -486,7 +490,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nickschaefer.Summits;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

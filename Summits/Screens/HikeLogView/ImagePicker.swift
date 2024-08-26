@@ -25,7 +25,7 @@ struct ImagePicker: View {
             }
             
             if images.isEmpty {
-                PhotosPicker(selection: $selectedPhoto, photoLibrary: .shared()) {
+                PhotosPicker(selection: $selectedPhoto, matching: .images, photoLibrary: .shared()) {
                     HStack {
                         Label("Add Photo", systemImage: "photo")
                         Spacer()
@@ -44,7 +44,7 @@ struct ImagePicker: View {
                 }, label: {
                     Label("Remove Photo", systemImage: "xmark")
                         .foregroundStyle(.red)
-                        .padding(.top, 10)
+                        .padding(.vertical, 8)
                 })
             }
         }

@@ -7,11 +7,13 @@
 
 import SwiftUI
 
-final class SummitListViewModel: ObservableObject {
-    @Published var summits: [Summit] = []
-    @Published var filteredSummits: [Summit] = []
-    @Published var filterShown = false
-    @Published var alertError: AlertError?
+@Observable
+class SummitListViewModel {
+    var summits: [Summit] = []
+    var progress: (Int, Int)?
+    var filteredSummits: [Summit] = []
+    var filterShown = false
+    var alertError: AlertError?
     
     var alertShown: Binding<Bool> {
         Binding {
@@ -65,5 +67,14 @@ final class SummitListViewModel: ObservableObject {
         default:
             return
         }
+    }
+    
+    func updateProgress(hikes: [Hike]) {
+        let hikedSummits = summits.filter { summit in
+            return hikes.contains { hike in
+                hike.summitID == summit.id
+            }
+        }
+        progress = (hikedSummits.count, summits.count)
     }
 }

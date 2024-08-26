@@ -9,7 +9,8 @@ import SwiftUI
 import SwiftData
 import PhotosUI
 
-@Observable class HikeLogViewModel {
+@Observable
+class HikeLogViewModel {
     var selectedDate = Date()
     var rating: Int = 5
     var weather: String = ""
