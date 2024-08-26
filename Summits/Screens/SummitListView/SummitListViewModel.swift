@@ -7,13 +7,30 @@
 
 import SwiftUI
 
-@Observable
-class SummitListViewModel {
-    var summits: [Summit] = []
+
+
+final class SummitListViewModel: ObservableObject {
+    private var summits: [Summit] = []
+    var hikes: [Hike] = []
     var progress: (Int, Int)?
-    var filteredSummits: [Summit] = []
-    var filterShown = false
-    var alertError: AlertError?
+    @Published var filteredSummits: [Summit] = []
+    @Published var filterShown = false
+    @Published var alertError: AlertError?
+
+    
+    @Published var sort: Sort = .name {
+        didSet { sortSummits() }
+    }
+    @Published var filter: Filter = .all {
+        didSet { filterSummits() }
+    }
+    @Published var searchText: String = "" {
+        didSet { filterSummits() }
+    }
+    
+    var filterSymbol: String {
+        filterShown ? "line.3.horizontal.decrease.circle" : "line.3.horizontal.decrease.circle.fill"
+    }
     
     var alertShown: Binding<Bool> {
         Binding {
@@ -23,10 +40,11 @@ class SummitListViewModel {
         }
     }
     
+    // MARK: - Public
+    
     func loadSummits() {
         do {
-            let summits = try getSummits()
-            self.summits = summits
+            summits = try getSummits()
             filteredSummits = summits
         } catch let error as AlertError {
             alertError = error
@@ -35,37 +53,30 @@ class SummitListViewModel {
         }
     }
     
-    func filterSummits(_ filter: String, hikes: [Hike]) {
+    func filterSummits() {
         switch filter {
-        case "all":
+        case .all:
             filteredSummits = summits
-        case "incomplete":
+        case .toHike:
             filteredSummits = summits.filter { summit in
-                return !hikes.contains { hike in
-                    hike.summitID == summit.id
-                }
+                !hikes.contains { $0.summitID == summit.id }
             }
-        case "complete":
+        case .completed:
             filteredSummits = summits.filter { summit in
-                return hikes.contains { hike in
-                    hike.summitID == summit.id
-                }
+                hikes.contains { $0.summitID == summit.id }
             }
-        default:
-            return
         }
+        
+        guard !searchText.isEmpty else { return }
+        filteredSummits = filteredSummits.filter { $0.name.localizedCaseInsensitiveContains(searchText)}
     }
     
-    func sortSummits(_ sortBy: String) {
-        switch sortBy {
-        case "elevation":
+    func sortSummits() {
+        switch sort {
+        case .elevation:
             filteredSummits = summits
-        case "alphabetical":
-            filteredSummits = summits.sorted(by: { summit1, summit2 in
-                summit1.name < summit2.name
-            })
-        default:
-            return
+        case .name:
+            filteredSummits = summits.sorted(by: {$0.name < $1.name})
         }
     }
     
