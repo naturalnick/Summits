@@ -16,14 +16,12 @@ struct SummitsListView: View {
     
     var body: some View {
         NavigationStack {
-            VStack {
-                if viewModel.filterShown {
-                    SummitListFilter(
-                        filter: $viewModel.filter,
-                        sort: $viewModel.sort,
-                        showSort:  !viewModel.filteredSummits.isEmpty
-                    )
-                }
+            if viewModel.filterShown {
+                SummitListFilter(
+                    filter: $viewModel.filter,
+                    sort: $viewModel.sort,
+                    showSort:  !viewModel.filteredSummits.isEmpty
+                )
             }
             
             List {
@@ -53,10 +51,9 @@ struct SummitsListView: View {
             .listStyle(.plain)
             .searchable(text: $viewModel.searchText)
             .navigationBarTitleDisplayMode(.large)
-            .navigationTitle("White Mountain 48")
             .navigationTitle("New Hampshire 48")
             .toolbar {
-                SummitListToolbar(viewModel: viewModel)
+                SummitListToolbar(viewModel: $viewModel)
             }
             
         }
@@ -66,7 +63,6 @@ struct SummitsListView: View {
             viewModel.updateProgress(hikes: hikes)
         }
         .onChange(of: hikes, { _, _ in
-            
             viewModel.updateProgress(hikes: hikes)
         })
         .alert(isPresented: viewModel.alertShown, error: viewModel.alertError, actions: { error in
@@ -75,8 +71,8 @@ struct SummitsListView: View {
             if let message = error.errorMessage {
                 Text(message)
             }
-    })
-               }
+        })
+    }
 }
 
 #Preview {
