@@ -23,6 +23,8 @@
 		01828EAD2B5F198D009D6D2E /* SummitMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01828EAC2B5F198D009D6D2E /* SummitMarker.swift */; };
 		01828EAF2B5F1A46009D6D2E /* ActiveSummitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01828EAE2B5F1A46009D6D2E /* ActiveSummitView.swift */; };
 		01828EB12B5F1CE5009D6D2E /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01828EB02B5F1CE5009D6D2E /* BackButton.swift */; };
+		01A00ECD2C7C1613007D9550 /* Sort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A00ECB2C7C1613007D9550 /* Sort.swift */; };
+		01A00ECE2C7C1613007D9550 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A00ECC2C7C1613007D9550 /* Filter.swift */; };
 		01B4CEB32AD23EDF00B551A5 /* SummitDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B4CEB22AD23EDF00B551A5 /* SummitDetailView.swift */; };
 		01CC32D72AD2EA0200901008 /* HikeLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CC32D62AD2EA0200901008 /* HikeLogView.swift */; };
 		01D8B8B62B6012D800739761 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D8B8B52B6012D800739761 /* ImagePicker.swift */; };
@@ -54,6 +56,8 @@
 		01828EAC2B5F198D009D6D2E /* SummitMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummitMarker.swift; sourceTree = "<group>"; };
 		01828EAE2B5F1A46009D6D2E /* ActiveSummitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveSummitView.swift; sourceTree = "<group>"; };
 		01828EB02B5F1CE5009D6D2E /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
+		01A00ECB2C7C1613007D9550 /* Sort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sort.swift; sourceTree = "<group>"; };
+		01A00ECC2C7C1613007D9550 /* Filter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		01B4CEB22AD23EDF00B551A5 /* SummitDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummitDetailView.swift; sourceTree = "<group>"; };
 		01CC32D62AD2EA0200901008 /* HikeLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HikeLogView.swift; sourceTree = "<group>"; };
 		01D8B8B52B6012D800739761 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
@@ -148,6 +152,8 @@
 		013C91322ACF6B6300E0F79A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				01A00ECC2C7C1613007D9550 /* Filter.swift */,
+				01A00ECB2C7C1613007D9550 /* Sort.swift */,
 				01424CA52B5D544000698D3A /* Hike.swift */,
 				01DF09A82ACB010B00692354 /* Summit.swift */,
 			);
@@ -283,10 +289,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				01828EB12B5F1CE5009D6D2E /* BackButton.swift in Sources */,
+				01A00ECE2C7C1613007D9550 /* Filter.swift in Sources */,
 				010ECBB12AD9AE3400525BC8 /* EmptyState.swift in Sources */,
 				01828EA92B5EE926009D6D2E /* MapView.swift in Sources */,
 				01D8B8B62B6012D800739761 /* ImagePicker.swift in Sources */,
 				012F5EAF2B6F2FAE004A5291 /* SummitListToolbar.swift in Sources */,
+				01A00ECD2C7C1613007D9550 /* Sort.swift in Sources */,
 				01424CA82B5D6E0600698D3A /* HikeDetailView.swift in Sources */,
 				01DF09A92ACB010B00692354 /* Summit.swift in Sources */,
 				01DF09B92ACBA28700692354 /* SummitListViewModel.swift in Sources */,

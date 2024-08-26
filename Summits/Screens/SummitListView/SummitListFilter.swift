@@ -8,38 +8,33 @@
 import SwiftUI
 
 struct SummitListFilter: View {
-    @State private var filter = "all"
-    @State private var sortBy = "elevation"
+    @Binding var filter: Filter
+    @Binding var sort: Sort
     
-    var hikes: [Hike]
-    var filteredSummits: [Summit]
+    let showSort: Bool
     
-    var filterSummits: (_ filter: String, _ hikes: [Hike]) -> Void
-    var sortSummits: (_ sortBy: String) -> Void
+    // MARK: - Body
     
     var body: some View {
         VStack {
             Picker("Filter", selection: $filter) {
-                Text("All").tag("all")
-                Text("To Hike").tag("incomplete")
-                Text("Completed").tag("complete")
+                ForEach(Filter.allCases) { filter in
+                    Text(filter.rawValue)
+                        .tag(filter)
+                }
             }
             .pickerStyle(.segmented)
             .padding(.horizontal)
-            .onChange(of: filter) { oldValue, newValue in
-                filterSummits(filter, hikes)
-            }
             
-            if !filteredSummits.isEmpty {
-                Picker("Sort", selection: $sortBy) {
-                    Text("By Elevation").tag("elevation")
-                    Text("By Name").tag("alphabetical")
+            if showSort {
+                Picker("Sort", selection: $sort) {
+                    ForEach(Sort.allCases) { sort in
+                        Text(sort.rawValue)
+                            .tag(sort)
+                    }
                 }
                 .pickerStyle(.segmented)
                 .padding(.horizontal)
-                .onChange(of: sortBy) { oldValue, newValue in
-                    sortSummits(sortBy)
-                }
             }
         }
     }
