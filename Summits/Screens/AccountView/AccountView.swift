@@ -24,18 +24,20 @@ struct AccountView: View {
     var body: some View {
         Form {
             Section {
-                Text("Developed by Nick Schaefer")
+                Label("A summit hiking log for tracking hikes of the New Hampshire 4000 foot mountains", systemImage: "mountain.2.circle")
+                Label("Developed by Nick Schaefer", systemImage: "person.fill")
                 Link(destination: URL(string: "https://www.nschaefer.com/")!, label: {
-                    Text("nschaefer.com")
+                    Label("www.nschaefer.com", systemImage: "globe")
                 })
-                Link(destination: URL(string: "https://github.com/naturalnick/Summits/blob/main/Privacy%20Policy")!, label: {
-                    Text("Privacy Policy")
-                })
-                ShareLink("Share App", item: URL(string: "https://apps.apple.com/us/app/white-mountain-4000ft-tracker/id6476589208")!)
-            } header: {
-                Text("About")
             }
 
+            Section {
+                Link(destination: URL(string: "https://github.com/naturalnick/Summits/blob/main/Privacy%20Policy")!, label: {
+                    Label("Privacy Policy", systemImage: "lock.circle")
+                })
+                ShareLink("Share App", item: URL(string: "https://apps.apple.com/us/app/white-mountain-4000ft-tracker/id6476589208")!)
+            }
+            
             Section {
                 Button(role: .destructive, action: {
                     confirmResetVisible = true
@@ -46,7 +48,7 @@ struct AccountView: View {
                 Text("Actions")
             }
         }
-        .navigationTitle("Settings")
+        .navigationTitle("About")
         .confirmationDialog("Confirm Clear Hike Data", isPresented: $confirmResetVisible, titleVisibility: .visible) {
             Button(role: .destructive, action: {
                 resetData()
