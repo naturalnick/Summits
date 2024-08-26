@@ -13,8 +13,6 @@ struct SummitListFilter: View {
     
     let showSort: Bool
     
-    // MARK: - Body
-    
     var body: some View {
         VStack {
             Picker("Filter", selection: $filter) {
