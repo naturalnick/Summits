@@ -50,7 +50,6 @@ struct HikeDetailView: View {
                     }
                 }
                 
-                
                 if !hike.details.isEmpty {
                     HStack (alignment: .top) {
                         Text("Details: ")
@@ -64,14 +63,21 @@ struct HikeDetailView: View {
             .padding(.top, hike.images.isEmpty ? 12 : 5)
             .padding([.horizontal, .bottom])
         }
-        .frame(maxWidth: .infinity)
-        .background(RoundedRectangle(cornerRadius: 12).foregroundStyle( Color(#colorLiteral(red: 0.9137254902, green: 0.9137254902, blue: 0.9215686275, alpha: 1))))
-        .foregroundStyle(.black)
     }
 }
 
-//#Preview {
-//    List {
-//        HikeDetailView(hike: Hike(summitID: "0", date: Date(), rating: 4, weather: "Sunny", companions: "None", details: "Details", images: []))
-//    }
-//}
+#Preview {
+    List {
+        HikeDetailView(
+            hike: Hike(
+                summitID: "0",
+                date: .now,
+                rating: 4,
+                weather: "Sunny",
+                companions: "None",
+                details: "Details",
+                images: []
+            )
+        )
+    }
+}

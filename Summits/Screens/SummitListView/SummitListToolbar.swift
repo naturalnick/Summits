@@ -16,7 +16,7 @@ struct SummitListToolbar: ToolbarContent {
                 AccountView()
             } label: {
                 Image(systemName: "gearshape.fill")
-                    .foregroundStyle(.black)
+                    .tint(.primary)
             }
         }
         ToolbarItem(placement: .topBarTrailing) {
@@ -26,11 +26,8 @@ struct SummitListToolbar: ToolbarContent {
                     print(viewModel.filterShown)
                 }
             } label: {
-                Image(systemName: viewModel.filterShown ? "line.3.horizontal.decrease.circle" : "line.3.horizontal.decrease.circle.fill")
-                    .foregroundStyle(.black)
-                    .onAppear(perform: {
-                        print(viewModel.filterShown, "Here")
-                    })
+                Image(systemName: viewModel.filterSymbol)
+                    .tint(.primary)
             }
         }
         
@@ -38,11 +35,11 @@ struct SummitListToolbar: ToolbarContent {
             ToolbarItem(placement: .principal) {
                 Text("\(progress.0) / \(progress.1)")
                     .font(.headline)
-                    .foregroundStyle(.black)
                     .padding(.vertical, 6)
                     .padding(.horizontal, 10)
-                    .background(RoundedRectangle(cornerRadius: 10.0)
-                        .strokeBorder(style: StrokeStyle(lineWidth: 2))
+                    .background(
+                        RoundedRectangle(cornerRadius: 10.0)
+                            .strokeBorder(style: StrokeStyle(lineWidth: 2))
                     )
             }
         }
@@ -51,8 +48,8 @@ struct SummitListToolbar: ToolbarContent {
             NavigationLink {
                 MapView()
             } label: {
-                    Image(systemName: "map.fill")
-                        .foregroundStyle(.black)
+                Image(systemName: "map.fill")
+                    .tint(.primary)
             }
         }
     }
