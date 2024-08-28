@@ -44,7 +44,7 @@ struct ActiveSummitView: View {
             VStack(alignment: .leading){
                 Text(selectedSummit.name)
                     .font(.title2)
-                Text("\(selectedSummit.elevationFt) ft")
+                Text(selectedSummit.formattedElevation)
                     .font(.title3)
             }
             .padding(.leading, 10)

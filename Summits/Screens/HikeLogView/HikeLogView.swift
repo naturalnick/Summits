@@ -158,10 +158,24 @@ struct HikeLogView: View {
 #Preview {
     NavigationStack {
         Text("")
-            .sheet(isPresented: .constant(true), content: {
-                HikeLogView(viewModel: HikeLogViewModel(), summit: MockData.sampleSummit, currentHike: Hike(summitID: "0", date: Date(), rating: 5, weather: "Sunny", companions: "", details: "Details", images: []), hikeLogVisible: .constant(true))
+            .sheet(
+                isPresented: .constant(true)) {
+                    HikeLogView(
+                        viewModel: HikeLogViewModel(),
+                        summit: .washington,
+                        currentHike: Hike(
+                            summitID: "0",
+                            date: Date(),
+                            rating: 5,
+                            weather: "Sunny",
+                            companions: "",
+                            details: "Details",
+                            images: []
+                        ),
+                        hikeLogVisible: .constant(true)
+                    )
                     .presentationDetents([.large])
-            })
+            }
     }
     .modelContainer(for: Hike.self)
 }
