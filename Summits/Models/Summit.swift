@@ -9,13 +9,59 @@ import Foundation
 
 
 struct Summit: Decodable, Identifiable, Equatable {
+    private let prominenceFt: Int
+    let elevationFt: Int
     let id: String
     let name: String
-    let elevationFt: Int
     let range: String
-    let prominenceFt: Int
     let geolocation: Geolocation
     let state: String
+    
+    var formattedElevation: String {
+        let measurement = Measurement(value: Double(elevationFt), unit: UnitLength.feet)
+        return measurement.formatted(.measurement(width: .abbreviated, usage: .asProvided))
+    }
+    
+    var formattedProminence: String {
+        let measurement = Measurement(value: Double(prominenceFt), unit: UnitLength.feet)
+        return measurement.formatted(.measurement(width: .abbreviated, usage: .asProvided))
+    }
+    
+    // MARK: - Initializer
+    
+    init(
+        id: String,
+        name: String,
+        elevationFt: Int,
+        range: String,
+        prominenceFt: Int,
+        geolocation: Geolocation,
+        state: String
+    ) {
+        self.id = id
+        self.name = name
+        self.elevationFt = elevationFt
+        self.range = range
+        self.prominenceFt = prominenceFt
+        self.geolocation = geolocation
+        self.state = state
+    }
+    
+    // MARK: - Mock Data
+    
+    static let washington = Summit(
+        id: "0",
+        name: "Washington",
+        elevationFt: 6288,
+        range: "Presidential Range",
+        prominenceFt: 6148,
+        geolocation: Geolocation(latitude: 44.2704, longitude: -71.3033),
+        state: "New Hampshire"
+    )
+    
+    static let summits: [Summit] = [.washington, .washington, .washington, .washington]
+ 
+    // MARK: - Equatable
     
     static func == (lhs: Summit, rhs: Summit) -> Bool {
         lhs.id == rhs.id
@@ -29,10 +75,4 @@ struct Geolocation: Decodable {
 
 struct SummitResponse: Decodable {
     let response: [Summit]
-}
-
-struct MockData {
-    static let sampleSummit = Summit(id: "0", name: "Washington", elevationFt: 6288, range: "Presidential Range", prominenceFt: 6148, geolocation: Geolocation(latitude: 44.2704, longitude: -71.3033), state: "New Hampshire")
-    
-    static let summits = [sampleSummit, sampleSummit, sampleSummit, sampleSummit]
 }

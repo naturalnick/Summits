@@ -123,7 +123,10 @@ struct SummitDetailView: View {
 
 #Preview {
     NavigationStack {
-        SummitDetailView(summit: MockData.sampleSummit, hikes: [])
+        SummitDetailView(
+            summit: .washington,
+            hikes: []
+        )
     }
     .modelContainer(for: Hike.self)
 }
