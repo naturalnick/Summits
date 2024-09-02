@@ -43,8 +43,6 @@ struct SummitDetailView: View {
         hikeLogVisible = true
     }
     
-    // MARK: - Body
-    
     var body: some View {
         VStack(spacing: 0) {
             header
@@ -86,8 +84,6 @@ struct SummitDetailView: View {
             }
         }
     }
-    
-    // MARK: - Private
     
     private var header: some View {
         VStack {
@@ -152,9 +148,7 @@ struct SummitDetailView: View {
 #Preview {
     NavigationStack {
         SummitDetailView(
-            summit: MockData.sampleSummit,
             hikes: []
-        )
-    }
+            summit: .washington,
     .modelContainer(for: Hike.self)
 }

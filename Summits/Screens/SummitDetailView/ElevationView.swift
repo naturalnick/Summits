@@ -16,7 +16,7 @@ struct ElevationView: View {
                 VStack {
                     Text("Elevation:")
                         .frame(maxWidth: .infinity, alignment: .leading)
-                    Text("\(summit.elevationFt) ft")
+                    Text(summit.formattedElevation)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .font(.title)
                 }
@@ -24,7 +24,7 @@ struct ElevationView: View {
                 VStack {
                     Text("Prominence:")
                         .frame(maxWidth: .infinity, alignment: .leading)
-                    Text("\(summit.prominenceFt) ft")
+                    Text(summit.formattedProminence)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .font(.title)
                 }

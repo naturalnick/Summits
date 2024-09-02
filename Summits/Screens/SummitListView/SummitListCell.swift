@@ -21,7 +21,7 @@ struct SummitListCell: View {
             VStack {
                 Image(systemName: "mountain.2")
                     .font(.system(size: 32))
-                Text("\(summit.elevationFt) ft")
+                Text(summit.formattedElevation)
                     .font(.system(size: 16, weight: .semibold))
             }
             
@@ -44,6 +44,10 @@ struct SummitListCell: View {
 
 struct SummitListCell_Previews: PreviewProvider {
     static var previews: some View {
-        SummitListCell(summit: MockData.sampleSummit, index: 0, hiked: true)
+        SummitListCell(
+            summit: .washington,
+            index: 0,
+            hiked: true
+        )
     }
 }
