@@ -27,8 +27,6 @@ struct Summit: Decodable, Identifiable, Equatable {
         return measurement.formatted(.measurement(width: .abbreviated, usage: .asProvided))
     }
     
-    // MARK: - Initializer
-    
     init(
         id: String,
         name: String,
@@ -47,8 +45,6 @@ struct Summit: Decodable, Identifiable, Equatable {
         self.state = state
     }
     
-    // MARK: - Mock Data
-    
     static let washington = Summit(
         id: "0",
         name: "Washington",
@@ -60,8 +56,6 @@ struct Summit: Decodable, Identifiable, Equatable {
     )
     
     static let summits: [Summit] = [.washington, .washington, .washington, .washington]
- 
-    // MARK: - Equatable
     
     static func == (lhs: Summit, rhs: Summit) -> Bool {
         lhs.id == rhs.id
