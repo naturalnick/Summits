@@ -148,7 +148,9 @@ struct SummitDetailView: View {
 #Preview {
     NavigationStack {
         SummitDetailView(
+            summit: .washington, 
             hikes: []
-            summit: .washington,
+        )
+    }
     .modelContainer(for: Hike.self)
 }
