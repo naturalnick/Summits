@@ -17,7 +17,7 @@ class SummitListViewModel {
     var alertError: AlertError?
     
     
-    var sort: Sort = .name {
+    var sort: Sort = .elevation {
         didSet { sortSummits() }
     }
     var filter: Filter = .all {
