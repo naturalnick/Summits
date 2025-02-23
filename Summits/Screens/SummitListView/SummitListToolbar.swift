@@ -23,7 +23,6 @@ struct SummitListToolbar: ToolbarContent {
             Button {
                 withAnimation {
                     viewModel.filterShown.toggle()
-                    print(viewModel.filterShown)
                 }
             } label: {
                 Image(systemName: viewModel.filterSymbol)
