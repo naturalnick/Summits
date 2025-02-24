@@ -67,5 +67,5 @@ struct MapView: View {
 }
 
 #Preview {
-    MapView(currentSummit: Summit(id: "0", name: "Washington", elevationFt: 6288, range: "Presidential Range", prominenceFt: 5288, geolocation: Geolocation(latitude: 71.3034, longitude: 44.2704), state: "New Hampshire"))
+    MapView(currentSummit: Summit(id: "0", name: "Washington", officialName: "WASHINGTON", elevationFt: 6288, range: "Presidential Range", prominenceFt: 5288, geolocation: Geolocation(latitude: 71.3034, longitude: 44.2704), state: "New Hampshire"))
 }

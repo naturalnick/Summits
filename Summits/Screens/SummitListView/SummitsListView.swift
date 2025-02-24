@@ -13,7 +13,16 @@ struct SummitsListView: View {
     
     @Query private var hikes: [Hike]
     @State var isMapViewLoading = false
+    @State private var exportFeatureAlertVisible = false
     
+func checkForExportFeatureAlert() {
+        let hasSeenExportAlert = UserDefaults.standard.bool(forKey: "hasSeenExportAlert")
+        if !hasSeenExportAlert {
+            exportFeatureAlertVisible = true
+            UserDefaults.standard.set(true, forKey: "hasSeenExportAlert")
+        }
+    }
+
     var body: some View {
         NavigationStack {
             List {
@@ -64,6 +73,7 @@ struct SummitsListView: View {
             viewModel.hikes = hikes
             viewModel.loadSummits()
             viewModel.updateProgress(hikes: hikes)
+            checkForExportFeatureAlert()
         }
         .onChange(of: hikes, { _, _ in
             viewModel.updateProgress(hikes: hikes)
@@ -75,6 +85,11 @@ struct SummitsListView: View {
                 Text(message)
             }
         })
+        .alert("New Feature: Export Your Hikes", isPresented: $exportFeatureAlertVisible) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text("You can now export your hiking data directly into the 4000 Footer Club Application! \n\nJust go to\nSettings > Export Hike Data.")
+        }
     }
 }
 

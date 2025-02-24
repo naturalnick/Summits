@@ -18,6 +18,8 @@
 		01424CA82B5D6E0600698D3A /* HikeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01424CA72B5D6E0600698D3A /* HikeDetailView.swift */; };
 		01424CAA2B5D6F3900698D3A /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01424CA92B5D6F3900698D3A /* Utils.swift */; };
 		015588F62D6BC34B001D5F8D /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 015588F52D6BC34B001D5F8D /* ZIPFoundation */; };
+		015588F92D6CC19E001D5F8D /* CoreXLSX in Frameworks */ = {isa = PBXBuildFile; productRef = 015588F82D6CC19E001D5F8D /* CoreXLSX */; };
+		015588FB2D6CC7B6001D5F8D /* WM4_app.csv in Resources */ = {isa = PBXBuildFile; fileRef = 015588FA2D6CC7B6001D5F8D /* WM4_app.csv */; };
 		0168E40A2B6339AD00A15300 /* version.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0168E4092B6339AD00A15300 /* version.txt */; };
 		017D830B2B62084300DAB12D /* ElevationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017D830A2B62084300DAB12D /* ElevationView.swift */; };
 		01828EA92B5EE926009D6D2E /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01828EA82B5EE926009D6D2E /* MapView.swift */; };
@@ -52,6 +54,7 @@
 		01424CA52B5D544000698D3A /* Hike.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hike.swift; sourceTree = "<group>"; };
 		01424CA72B5D6E0600698D3A /* HikeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HikeDetailView.swift; sourceTree = "<group>"; };
 		01424CA92B5D6F3900698D3A /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		015588FA2D6CC7B6001D5F8D /* WM4_app.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = WM4_app.csv; sourceTree = "<group>"; };
 		0168E4092B6339AD00A15300 /* version.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = version.txt; sourceTree = "<group>"; };
 		017D830A2B62084300DAB12D /* ElevationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElevationView.swift; sourceTree = "<group>"; };
 		01828EA82B5EE926009D6D2E /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
@@ -80,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				015588F92D6CC19E001D5F8D /* CoreXLSX in Frameworks */,
 				015588F62D6BC34B001D5F8D /* ZIPFoundation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -111,6 +115,7 @@
 				013C912E2ACF69EE00E0F79A /* Views */,
 				01DF09B62ACBA25200692354 /* Screens */,
 				01DF09B42ACB47FF00692354 /* Info.plist */,
+				015588FA2D6CC7B6001D5F8D /* WM4_app.csv */,
 				0104445F2ACAEC4C004621C6 /* SummitsApp.swift */,
 				010444632ACAEC4F004621C6 /* Assets.xcassets */,
 				010444652ACAEC4F004621C6 /* Preview Content */,
@@ -267,6 +272,7 @@
 			mainGroup = 010444532ACAEC4C004621C6;
 			packageReferences = (
 				015588F42D6BC34B001D5F8D /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
+				015588F72D6CC19E001D5F8D /* XCRemoteSwiftPackageReference "CoreXLSX" */,
 			);
 			productRefGroup = 0104445D2ACAEC4C004621C6 /* Products */;
 			projectDirPath = "";
@@ -282,6 +288,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				015588FB2D6CC7B6001D5F8D /* WM4_app.csv in Resources */,
 				01DF09B52ACB62A100692354 /* data.json in Resources */,
 				010444672ACAEC4F004621C6 /* Preview Assets.xcassets in Resources */,
 				0168E40A2B6339AD00A15300 /* version.txt in Resources */,
@@ -550,6 +557,14 @@
 				minimumVersion = 0.9.19;
 			};
 		};
+		015588F72D6CC19E001D5F8D /* XCRemoteSwiftPackageReference "CoreXLSX" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/CoreOffice/CoreXLSX";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.14.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -557,6 +572,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 015588F42D6BC34B001D5F8D /* XCRemoteSwiftPackageReference "ZIPFoundation" */;
 			productName = ZIPFoundation;
+		};
+		015588F82D6CC19E001D5F8D /* CoreXLSX */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 015588F72D6CC19E001D5F8D /* XCRemoteSwiftPackageReference "CoreXLSX" */;
+			productName = CoreXLSX;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

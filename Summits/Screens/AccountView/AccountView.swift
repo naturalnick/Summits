@@ -2,6 +2,7 @@ import SwiftUI
 import SwiftData
 import UIKit
 import ZIPFoundation
+import CoreXLSX
 
 struct AccountView: View {
     @Environment(\.modelContext) private var modelContext
@@ -13,6 +14,8 @@ struct AccountView: View {
     @State private var exportURL: URL?
     @State private var isExporting = false
     @State private var isExportSheetVisible = false
+    @State private var showExportError = false
+    @State private var exportErrorMessage = ""
     
     func loadSummits() {
         do {
@@ -48,74 +51,72 @@ struct AccountView: View {
     func exportHikes() {
         isExporting = true
         DispatchQueue.global(qos: .userInitiated).async {
-            guard let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            guard let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first,
+                  let templatePath = Bundle.main.url(forResource: "WM4_app", withExtension: "csv") else {
                 DispatchQueue.main.async {
-                    isExporting = false
+                    self.isExporting = false
+                    self.exportErrorMessage = "Failed to locate export template"
+                    self.showExportError = true
                 }
                 return
             }
             
-            let exportFolder = documentsPath.appendingPathComponent("HikeExport", isDirectory: true)
-            
-            try? FileManager.default.createDirectory(at: exportFolder, withIntermediateDirectories: true, attributes: nil)
-            
-            let textFileURL = exportFolder.appendingPathComponent("hikes_export.txt")
-            
-            var exportText = "Summits Hiking Log\n\n"
-            
-            var fileURLs = [textFileURL]
-            
-            for hike in hikes {
-                let summitName = getSummitName(for: hike.summitID)
-                let dateStr = formatDateForFilename(date: hike.date)
-                
-                exportText += """
-            Summit: \(summitName)
-            Date: \(dateStr)
-            Rating: \(hike.rating)
-            Weather: \(hike.weather)
-            Companions: \(hike.companions)
-            Details: \(hike.details)
-            Images: \(!hike.images.isEmpty ? "\(hike.images.count) attached" : "None")
-            """
-                
-                for (index, imageData) in hike.images.enumerated() {
-                    // Create a filename with summit name and date
-                    let imageFileName = "\(summitName)_\(dateStr)\(index != 0 ? "_\(index + 1)" : "").jpg"
-                        .replacingOccurrences(of: " ", with: "-") // Replace spaces with hyphens
-                        .replacingOccurrences(of: "/", with: "-") // Replace slashes
-                    
-                    let imageFileURL = exportFolder.appendingPathComponent(imageFileName)
-                    
-                    do {
-                        try imageData.write(to: imageFileURL)
-                        fileURLs.append(imageFileURL)
-                    } catch {
-                        print("Failed to save image: \(error)")
-                    }
-                }
-            }
+            let exportPath = documentsPath.appendingPathComponent("WM4_app_filled.csv")
             
             do {
-                try exportText.write(to: textFileURL, atomically: true, encoding: .utf8)
-            } catch {
-                print("Failed to write text file: \(error)")
-                return
-            }
-            
-            let zipFileURL = documentsPath.appendingPathComponent("HikeExport.zip")
-            
-            try? FileManager.default.removeItem(at: zipFileURL)
-            
-            if zipFiles(fileURLs: fileURLs, zipFileURL: zipFileURL) {
-                DispatchQueue.main.async {
-                    self.exportURL = zipFileURL
-                    self.isExporting = false
-                    isExportSheetVisible = true
+                if FileManager.default.fileExists(atPath: exportPath.path) {
+                    try FileManager.default.removeItem(at: exportPath)
                 }
-            } else {
+                
+                try FileManager.default.copyItem(at: templatePath, to: exportPath)
+                
+                let csvContent = try String(contentsOf: exportPath, encoding: .utf8)
+                var csvLines = csvContent.components(separatedBy: .newlines)
+                
+                let hikesBySummit = Dictionary(grouping: hikes, by: { $0.summitID })
+                
+                for (index, line) in csvLines.enumerated() {
+                    let components = line.components(separatedBy: ",")
+                    guard components.count >= 2 else { continue }
+                    
+                    let mountainName = components[0]
+                    
+                    let elevation = components.count > 1 ? components[2] : ""
+                    
+                    if let summit = summits.first(where: { $0.officialName == mountainName }),
+                       let latestHike = hikesBySummit[summit.id]?.sorted(by: { $0.date > $1.date }).first {
+                        
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "MM/dd/yyyy"
+                        let dateString = dateFormatter.string(from: latestHike.date)
+                        
+                        let comments = """
+                            \(latestHike.weather.isEmpty ? "\(latestHike.weather)." : "")
+                            \(!latestHike.companions.isEmpty ? "Companions: \(latestHike.companions). " : "")
+                            \(latestHike.details.isEmpty ? "\(latestHike.details)." : "")
+                            Rated: \(latestHike.rating)/5
+                            """.replacingOccurrences(of: "\n", with: " ").trimmingCharacters(in: .whitespacesAndNewlines)
+                        let escapedComments = comments.replacingOccurrences(of: "\"", with: "\"\"")
+                        
+                        // Double commas are unused columns in the original spreadsheet
+                        csvLines[index] = "\(mountainName),,\(elevation),\(dateString),,\"\(escapedComments)\"".trimmingCharacters(in: .whitespaces)
+                    }
+                }
+                
+                let updatedContent = csvLines.filter { !$0.isEmpty }.joined(separator: "\r\n")
+                try updatedContent.write(to: exportPath, atomically: true, encoding: .utf8)
+                
+                DispatchQueue.main.async {
+                    self.exportURL = exportPath
+                    self.isExporting = false
+                    self.isExportSheetVisible = true
+                }
+            } catch {
+                print("Export failed: \(error)")
                 DispatchQueue.main.async {
                     self.isExporting = false
+                    self.exportErrorMessage = "Failed to export: \(error.localizedDescription)"
+                    self.showExportError = true
                 }
             }
         }
@@ -197,6 +198,11 @@ struct AccountView: View {
                     Text("Confirm Export")
                 }
             }
+        }
+        .alert("Export Error", isPresented: $showExportError) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text(exportErrorMessage)
         }
     }
 }

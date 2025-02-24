@@ -13,6 +13,7 @@ struct Summit: Decodable, Identifiable, Equatable {
     let elevationFt: Int
     let id: String
     let name: String
+    let officialName: String
     let range: String
     let geolocation: Geolocation
     let state: String
@@ -30,6 +31,7 @@ struct Summit: Decodable, Identifiable, Equatable {
     init(
         id: String,
         name: String,
+        officialName : String,
         elevationFt: Int,
         range: String,
         prominenceFt: Int,
@@ -38,6 +40,7 @@ struct Summit: Decodable, Identifiable, Equatable {
     ) {
         self.id = id
         self.name = name
+        self.officialName = officialName
         self.elevationFt = elevationFt
         self.range = range
         self.prominenceFt = prominenceFt
@@ -48,6 +51,7 @@ struct Summit: Decodable, Identifiable, Equatable {
     static let washington = Summit(
         id: "0",
         name: "Washington",
+        officialName: "WASHINGTON",
         elevationFt: 6288,
         range: "Presidential Range",
         prominenceFt: 6148,
