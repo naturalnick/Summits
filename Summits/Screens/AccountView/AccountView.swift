@@ -57,14 +57,13 @@ struct AccountView: View {
             
             let exportFolder = documentsPath.appendingPathComponent("HikeExport", isDirectory: true)
             
-            // Create export directory if it doesn't exist
             try? FileManager.default.createDirectory(at: exportFolder, withIntermediateDirectories: true, attributes: nil)
             
             let textFileURL = exportFolder.appendingPathComponent("hikes_export.txt")
             
             var exportText = "Summits Hiking Log\n\n"
             
-            var fileURLs = [textFileURL] // Collect all file URLs for zipping
+            var fileURLs = [textFileURL]
             
             for hike in hikes {
                 let summitName = getSummitName(for: hike.summitID)
@@ -97,7 +96,6 @@ struct AccountView: View {
                 }
             }
             
-            // Save text file
             do {
                 try exportText.write(to: textFileURL, atomically: true, encoding: .utf8)
             } catch {
@@ -105,10 +103,8 @@ struct AccountView: View {
                 return
             }
             
-            // Create ZIP file
             let zipFileURL = documentsPath.appendingPathComponent("HikeExport.zip")
             
-            // Remove existing zip file if it exists
             try? FileManager.default.removeItem(at: zipFileURL)
             
             if zipFiles(fileURLs: fileURLs, zipFileURL: zipFileURL) {
