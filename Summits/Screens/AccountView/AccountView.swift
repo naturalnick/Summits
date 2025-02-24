@@ -2,7 +2,6 @@ import SwiftUI
 import SwiftData
 import UIKit
 import ZIPFoundation
-import CoreXLSX
 
 struct AccountView: View {
     @Environment(\.modelContext) private var modelContext

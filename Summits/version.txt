@@ -1,5 +1,7 @@
-Version 1.2 Changes
-Show hikes progress bar
-Add search bar
-Fix incorrect mountain coordinates
-Bug fixes
+Version 1.4 Changes
+- Export data directly into official 4000 Footer Club application
+- Fixed bug where incorrect list filter was shown on screen load
+- Improve progress bar to show incrementally fill
+- Reduced size of header and moved to nav bar
+- Dark mode support
+- Measurement API integrated

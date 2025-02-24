@@ -18,7 +18,6 @@
 		01424CA82B5D6E0600698D3A /* HikeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01424CA72B5D6E0600698D3A /* HikeDetailView.swift */; };
 		01424CAA2B5D6F3900698D3A /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01424CA92B5D6F3900698D3A /* Utils.swift */; };
 		015588F62D6BC34B001D5F8D /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 015588F52D6BC34B001D5F8D /* ZIPFoundation */; };
-		015588F92D6CC19E001D5F8D /* CoreXLSX in Frameworks */ = {isa = PBXBuildFile; productRef = 015588F82D6CC19E001D5F8D /* CoreXLSX */; };
 		015588FB2D6CC7B6001D5F8D /* WM4_app.csv in Resources */ = {isa = PBXBuildFile; fileRef = 015588FA2D6CC7B6001D5F8D /* WM4_app.csv */; };
 		0168E40A2B6339AD00A15300 /* version.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0168E4092B6339AD00A15300 /* version.txt */; };
 		017D830B2B62084300DAB12D /* ElevationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017D830A2B62084300DAB12D /* ElevationView.swift */; };
@@ -83,7 +82,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				015588F92D6CC19E001D5F8D /* CoreXLSX in Frameworks */,
 				015588F62D6BC34B001D5F8D /* ZIPFoundation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -272,7 +270,6 @@
 			mainGroup = 010444532ACAEC4C004621C6;
 			packageReferences = (
 				015588F42D6BC34B001D5F8D /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
-				015588F72D6CC19E001D5F8D /* XCRemoteSwiftPackageReference "CoreXLSX" */,
 			);
 			productRefGroup = 0104445D2ACAEC4C004621C6 /* Products */;
 			projectDirPath = "";
@@ -476,7 +473,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nickschaefer.Summits;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -512,7 +509,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nickschaefer.Summits;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -557,14 +554,6 @@
 				minimumVersion = 0.9.19;
 			};
 		};
-		015588F72D6CC19E001D5F8D /* XCRemoteSwiftPackageReference "CoreXLSX" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/CoreOffice/CoreXLSX";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.14.2;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -572,11 +561,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 015588F42D6BC34B001D5F8D /* XCRemoteSwiftPackageReference "ZIPFoundation" */;
 			productName = ZIPFoundation;
-		};
-		015588F82D6CC19E001D5F8D /* CoreXLSX */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 015588F72D6CC19E001D5F8D /* XCRemoteSwiftPackageReference "CoreXLSX" */;
-			productName = CoreXLSX;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
