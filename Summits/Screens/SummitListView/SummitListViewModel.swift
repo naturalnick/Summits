@@ -13,9 +13,8 @@ class SummitListViewModel {
     var hikes: [Hike] = []
     var progress: (Int, Int)?
     var filteredSummits: [Summit] = []
-    var filterShown = true
+    var filterShown = false
     var alertError: AlertError?
-    
     
     var sort: Sort = .elevation {
         didSet { sortSummits() }
@@ -25,10 +24,6 @@ class SummitListViewModel {
     }
     var searchText: String = "" {
         didSet { filterSummits() }
-    }
-    
-    var filterSymbol: String {
-        filterShown ? "line.3.horizontal.decrease.circle" : "line.3.horizontal.decrease.circle.fill"
     }
     
     var alertShown: Binding<Bool> {

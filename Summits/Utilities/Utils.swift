@@ -25,3 +25,4 @@ func getSummits() throws -> [Summit] {
         throw AlertError.fileNotFound
     }
 }
+

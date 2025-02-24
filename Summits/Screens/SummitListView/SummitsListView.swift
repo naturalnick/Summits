@@ -16,15 +16,18 @@ struct SummitsListView: View {
     
     var body: some View {
         NavigationStack {
-            if viewModel.filterShown {
-                SummitListFilter(
-                    filter: $viewModel.filter,
-                    sort: $viewModel.sort,
-                    showSort:  !viewModel.filteredSummits.isEmpty
-                )
-            }
-            
             List {
+                if viewModel.filterShown {
+                    SummitListFilter(
+                        filter: $viewModel.filter,
+                        sort: $viewModel.sort,
+                        showSort:  !viewModel.filteredSummits.isEmpty
+                    )
+                }
+                if let progress = viewModel.progress, !viewModel.filterShown {
+                    SummitProgress(progress: progress.0)
+                        .listRowSeparator(.hidden)
+                }
                 ForEach(Array(viewModel.filteredSummits.enumerated()), id: \.element.id) { index, summit in
                     NavigationLink {
                         SummitDetailView(summit: summit)
@@ -50,10 +53,10 @@ struct SummitsListView: View {
             .animation(.default, value: viewModel.searchText)
             .listStyle(.plain)
             .searchable(text: $viewModel.searchText)
-            .navigationBarTitleDisplayMode(.large)
+            .navigationBarTitleDisplayMode(.inline)
             .navigationTitle("New Hampshire 48")
             .toolbar {
-                SummitListToolbar(viewModel: $viewModel)
+                SummitListToolbar(filterShown: $viewModel.filterShown)
             }
             
         }

@@ -39,6 +39,8 @@ struct SummitListCell: View {
                     .font(.title3)
             }
         }
+        .foregroundStyle(.primary)
+        .padding(.horizontal, 5)
     }
 }
 
