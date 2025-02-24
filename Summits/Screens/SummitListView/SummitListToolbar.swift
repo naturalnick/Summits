@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SummitListToolbar: ToolbarContent {
-    @Binding var viewModel: SummitListViewModel
+    @Binding var filterShown: Bool
     
     var body: some ToolbarContent {
         ToolbarItem(placement: .topBarLeading) {
@@ -22,27 +22,13 @@ struct SummitListToolbar: ToolbarContent {
         ToolbarItem(placement: .topBarTrailing) {
             Button {
                 withAnimation {
-                    viewModel.filterShown.toggle()
+                    filterShown.toggle()
                 }
             } label: {
-                Image(systemName: viewModel.filterSymbol)
+                Image(systemName: filterShown ? "line.3.horizontal.decrease.circle.fill" : "line.3.horizontal.decrease.circle")
                     .tint(.primary)
             }
         }
-        
-        if let progress = viewModel.progress {
-            ToolbarItem(placement: .principal) {
-                Text("\(progress.0) / \(progress.1)")
-                    .font(.headline)
-                    .padding(.vertical, 6)
-                    .padding(.horizontal, 10)
-                    .background(
-                        RoundedRectangle(cornerRadius: 10.0)
-                            .strokeBorder(style: StrokeStyle(lineWidth: 2))
-                    )
-            }
-        }
-        
         ToolbarItem(placement: .topBarTrailing) {
             NavigationLink {
                 MapView()
